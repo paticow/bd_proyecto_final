@@ -1,0 +1,34 @@
+<html>
+	<head></head>
+	<body>
+		<form>
+			<H1>Datos del trabajador</H1>
+			<label for="nombre">Nombre:</label>
+			<input type="text" name="nombre" id="nombre" />
+
+			<label for="apellido">Apellido:</label>
+			<input type="text" name="apellido" id="apellido" />
+
+			<label for="rol">Rol:</label>
+			<input type="text" name="rol" id="rol" />
+
+			{% if modo != "administrador" %}
+			<label for="Sueldo">Sueldo:</label>
+			<input type="number" name="rol" id="rol" min="0" />
+			{% endif %}
+
+			{% if modo == "eliminar" %}
+			<div>
+				<a><Button>Guardar</Button></a>
+				<a><Button>Eliminar</Button></a>
+				<a><Button>Salir</Button></a>
+			</div>
+			{% else %}
+			<div>
+				<a><Button>Guardar</Button></a>
+				<a><Button>Salir</Button></a>
+			</div>
+			{% endif %}
+		</form>
+	</body>
+</html>
