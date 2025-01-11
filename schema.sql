@@ -1,3 +1,5 @@
+DROP DATABASE deliverys;
+
 CREATE DATABASE deliverys;
 
 use deliverys;
@@ -27,11 +29,13 @@ INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo
 -- TABLA PARA LOS MENSAJES
 
 CREATE TABLE mensaje(
+	id INT NOT NULL AUTO_INCREMENT,
 	fk_administrador VARCHAR (10) NOT NULL, 
 	fk_trabajador VARCHAR (10) NOT NULL,
 	contenido VARCHAR (300) NOT NULL,
 	FOREIGN KEY(fk_administrador) REFERENCES trabajador(cedula),
 	FOREIGN KEY(fk_trabajador) REFERENCES trabajador(cedula),
+	PRIMARY KEY(id),
 	leido BOOLEAN default 0
 );
 

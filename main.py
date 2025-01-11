@@ -21,7 +21,11 @@ def administrador():
 
 @app.route('/trabajador')
 def trabajador():
-    return render_template('trabajador.html', nombre=session['nombre'])
+    cursor = connection.cursor()
+    sql = "SELECT m.id, t.nombre, t.apellido, m.contenido FROM mensaje m left join trabajador t on m.fk_trabajador = t.cedula WHERE m.fk_trabajador = %s AND m.leido = 0"
+    cursor.execute(sql, [session['cedula']])
+    mensajes = cursor.fetchall()
+    return render_template('trabajador.html', nombre=session['nombre'], mensajes=mensajes)
 
 @app.route('/perfil/<modo>/<cedula>')
 #modo: administrador, trabajador, eliminar, crear

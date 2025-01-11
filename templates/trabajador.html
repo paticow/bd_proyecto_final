@@ -24,18 +24,20 @@
 		<div>
 			<h1>Lista de Mensajes</h1>
 			<div id="list-container">
+				<p>{{mensajes}}</p>
+				{% for mensaje in mensajes %}
 				<div class="list-item">
 					<div class="list-information">
-						<h3>Mariano Olivares</h3>
-						<p>Ingeniero</p>
-						<p>Estimado Oscar, le pido que asista a la reunion...</p>
+						<h3>{{mensaje[1]}} {{mensaje[[2]]}}</h3>
+						<p>{{mensaje[3]}}</p>
 					</div>
 					<div class="button-container">
-						<a href="/mensaje/leer">
+						<a href="/messages">
 							<button>+</button>
 						</a>
 					</div>
 				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</body>

@@ -49,11 +49,13 @@
 			<a href="/home"><Button>Salir</Button></a>
 		</div>
 
+		{% if modo == "eliminar" %}
 		<form action="/sendMessage" method="POST">
 			<h1>Mensaje a {{user[1]}} {{user[2]}}</h1>
 			<textarea name="contenido" id="content" placeholder="..."></textarea>
 			<input name="cedula" value="{{user[0]}}" type="hidden" />
 			<input type="submit" value="Enviar" />
 		</form>	
+		{% endif %}
 	</body>
 </html>
