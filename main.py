@@ -26,7 +26,10 @@ def trabajador():
 @app.route('/perfil/<modo>/<cedula>')
 #modo: administrador, trabajador, eliminar, crear
 def perfil(modo, cedula):
-    user = getTrabajador(session['cedula']) if modo != "eliminar" else cedula
+    user = []
+    if modo == "administrador" or modo == "trabajador" : user = getTrabajador(session['cedula'])
+    if modo == "eliminar" : user = getTrabajador(cedula)
+    if modo == "crear" : user = []
     return render_template('perfil.html', modo=modo, user=user)
 
 @app.route('/mensaje/<modo>')
@@ -47,6 +50,7 @@ def login():
         usuario = cursor.fetchone()
         session['cedula'] = usuario[0]
         session['rol'] = usuario[4]
+        setUserStatus(session['cedula'], 1)
         return redirect(url_for('home'))
     else:
         return redirect(url_for('index'))
@@ -66,15 +70,21 @@ def createUser():
 def modifyUser():
     if request.method == 'POST':
         cursor = connection.cursor()
-        print(trabajador)
-        sql_administrador = "UPDATE trabajador SET nombre=%s, apellido=%s, cedula=%s, datos_transferencia=%s, rol=%s, horas=%s WHERE cedula=%s"
-        sql_trabajador = "UPDATE trabajador SET nombre=%s, apellido=%s, cedula=%s, datos_transferencia=%s WHERE cedula=%s"
-        if session['rol'] == 'administrador':
-            cursor.execute(sql_administrador, [request.form['nombre'], request.form['apellido'], request.form['cedula'], request.form['datos_transferencia'], request.form['rol'], request.form['horas'], request.form['cedula']])
-        else: 
-            cursor.execute(sql_administrador, [request.form['nombre'], request.form['apellido'], request.form['cedula'], request.form['datos_transferencia'], request.form['cedula']])
-
+        print(request.form)
+        sql = "UPDATE trabajador SET nombre=%s, apellido=%s, cedula=%s, datos_transferencia=%s, rol=%s, horas=%s WHERE cedula=%s"
+        cursor.execute(sql, [request.form['nombre'], request.form['apellido'], request.form['cedula'], request.form['datos_transferencia'], request.form['rol'], request.form['horas'], request.form['cedula']])
         session['nombre'] = request.form['nombre']
+        connection.commit()
+        return redirect(url_for('home'))
+    else:
+        pass
+
+@app.route('/sendMessage', methods=['GET', 'POST'])
+def sendMessage():
+    if request.method == 'POST':
+        cursor = connection.cursor()
+        sql = "INSERT INTO mensaje (fk_administrador, fk_trabajador, contenido, leido) VALUES (%s, %s, %s, %s)"
+        cursor.execute(sql, [session['cedula'], request.form['cedula'], request.form['contenido'], 0])
         connection.commit()
         return redirect(url_for('home'))
     else:
@@ -82,6 +92,7 @@ def modifyUser():
 
 @app.route('/logout')
 def logout():
+    setUserStatus(session['cedula'], 0)
     session.pop('nombre', None)
     session.pop('contrasena', None)
     session.pop('rol', None)
@@ -106,6 +117,12 @@ def getTrabajador(cedula):
     sql = 'SElECT * FROM trabajador WHERE cedula = %s'
     cursor.execute(sql, [cedula])
     return cursor.fetchone()
+
+def setUserStatus(cedula, estado):
+    cursor = connection.cursor()
+    sql = "UPDATE trabajador SET estado=%s WHERE cedula=%s"
+    cursor.execute(sql, [estado, session['cedula']])
+    connection.commit()
 
 if __name__ == '__main__':
     app.run(debug=True)
