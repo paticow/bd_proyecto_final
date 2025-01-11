@@ -5,12 +5,10 @@
 			<div if="top-container">
 				<div id="informacion">
 					<h1>NAILONG.INC</h1>
-					<H2>Bienvenido de vuelta Gilberto</H2>
+					<H2>Bienvenido de vuelta {{nombre}}</H2>
 					<H2>Admin</H2>
 					<div class="agregar-btn">
 						<a href="perfil/crear/nuevo"><button>Crear nuevo trabajador +</button></a>
-						<p>{{trabajadores}}</p>
-						<p>hola</p>
 					</div>
 					<div class="agregar-btn">
 						<a href="perfil/administrador/gilberto"><button>Editar perfil +</button></a>
@@ -36,7 +34,7 @@
 						<p>{{trabajador[4]}} | <span></span> {{"Activo" if trabajador[8] == 1 else "Inactivo" }}</p>
 					</div>
 					<div class="button-container">
-						<a href="perfil/eliminar/perfil"><button>+</button></a>
+						<a href="perfil/eliminar/{{trabajador[0]}}"><button>+</button></a>
 					</div>
 					<div class="button-container">
 						<a href="mensaje/escribir"><button>Mensaje</button></a>

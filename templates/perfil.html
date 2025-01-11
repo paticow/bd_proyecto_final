@@ -1,34 +1,37 @@
 <html>
 	<head></head>
 	<body>
-		<form>
+		<form action={{"/createUser" if modo == "crear" else "/modifyUser"}} method="POST">
 			<H1>Datos del trabajador</H1>
 			<label for="nombre">Nombre:</label>
-			<input type="text" name="nombre" id="nombre" />
+			<input type="text" name="nombre" id="nombre" value="{{user[1]}}" />
+			<p>{{user}}</p>
+
+			<label for="cedula">Cedula:</label>
+			<input type="text" name="cedula" id="cedula" value="{{user[0]}}" />
 
 			<label for="apellido">Apellido:</label>
-			<input type="text" name="apellido" id="apellido" />
+			<input type="text" name="apellido" id="apellido" value="{{user[2]}}" />
+
+			<label for="contrasena">Contrasena:</label>
+			<input type="text" name="contrasena" id="contrasena" value="{{user[3]}}" />
+
+			<label for="datos_transferencia">Datos de transferencia:</label>
+			<input type="text" name="datos_transferencia" id="datos_transferencia" value="{{user[7]}}" />
 
 			<label for="rol">Rol:</label>
-			<input type="text" name="rol" id="rol" />
+			<input type="text" name="rol" id="rol" value="{{user[4]}}" />
 
-			{% if modo != "administrador" %}
+			<label for="horas">Horas de trabajo:</label>
+			<input type="number" name="horas" id="horas" value="{{user[5]}}" />
+
 			<label for="Sueldo">Sueldo:</label>
-			<input type="number" name="rol" id="rol" min="0" />
-			{% endif %}
-
-			{% if modo == "eliminar" %}
+			<input type="number" name="sueldo" id="rol" min="0" value="{{user[6]}}" />
+			<a><Button>Guardar</Button></a>
+		</form>
 			<div>
-				<a><Button>Guardar</Button></a>
 				<a><Button>Eliminar</Button></a>
 				<a><Button>Salir</Button></a>
 			</div>
-			{% else %}
-			<div>
-				<a><Button>Guardar</Button></a>
-				<a><Button>Salir</Button></a>
-			</div>
-			{% endif %}
-		</form>
 	</body>
 </html>

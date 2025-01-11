@@ -12,14 +12,14 @@ CREATE TABLE trabajador(
 	rol VARCHAR(30) NOT NULL,
 	horas INT NOT NULL default 0,
 	sueldo INT NOT NULL default 0,
-	datos_transferencia VARCHAR(100) NOT NULL UNIQUE,
+	datos_transferencia VARCHAR(100) NOT NULL,
 	estado INT default 0
 );
 
-INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('890432987','Gustavo', 'Diaz', 'trabajador' ,'Ingeniero Informatico', 8, 400,  'Mercantil, 0412432809, 74968958',0);
-INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('342374923','Antonio', 'Jimenez', 'trabajador' ,'Comerciante', 5, 500, 'Banesco, 0412893482, 38492834',1);
-INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('384927422','Maria', 'Guzman', 'trabajador', 'Expositor', 8, 300,  'Exterior, 0414384832, 9384829', 0);
-INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('83473283','Eric', 'Stephenson', 'Administrador', 'Expositor', 8, 300,  'Venezuela, 0414384832, 9384829', 0);
+INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('890432987','Gustavo', 'Diaz', 'trabajador' ,'administrador', 8, 400,  'Mercantil, 0412432809, 74968958',0);
+INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('342374923','Antonio', 'Jimenez', 'trabajador' ,'administrador', 5, 500, 'Banesco, 0412893482, 38492834',1);
+INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('384927422','Maria', 'Guzman', 'trabajador', 'Ingeniero', 8, 300,  'Exterior, 0414384832, 9384829', 0);
+INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('83473283','Eric', 'Stephenson', 'Administrador', 'Comerciante', 8, 300,  'Venezuela, 0414384832, 9384829', 0);
 INSERT INTO trabajador (cedula, nombre, apellido, contrasena, rol, horas, sueldo, datos_transferencia, estado) VALUES ('34829423','Kyle', 'Mercury', 'Administrador', 'Expositor', 8, 300,  'Mercantil, 0414384832, 9384829', 0);
 
 
