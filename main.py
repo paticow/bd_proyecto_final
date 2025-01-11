@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
+import pymysql
 
 app = Flask(__name__)
+app.secret_key = 'nailongsecret'
 
 #templates
 
@@ -31,15 +33,22 @@ def mensaje(modo):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST' and validateUser(request.form['nombre'], request.form['contrasena']):
+        session['nombre'] = request.form['nombre']
+        session['contrasena'] = request.form['contrasena']
         return redirect(url_for('home'))
     else:
         return redirect(url_for('index'))
 
+@app.route('/logout')
+def logout():
+    session.pop('nombre', None)
+    session.pop('contrasena', None)
+    session.pop('rol', None)
+    return redirect(url_for('index'))
 
 @app.route('/home')
 def home():
-    rol = 'trabajador'
-    if(rol != 'administrador'):
+    if(session['rol'] != 'administrador'):
         return redirect(url_for('administrador'))
     else: 
         return redirect(url_for('trabajador'))
