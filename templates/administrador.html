@@ -9,6 +9,8 @@
 					<H2>Admin</H2>
 					<div class="agregar-btn">
 						<a href="perfil/crear/nuevo"><button>Crear nuevo trabajador +</button></a>
+						<p>{{trabajadores}}</p>
+						<p>hola</p>
 					</div>
 					<div class="agregar-btn">
 						<a href="perfil/administrador/gilberto"><button>Editar perfil +</button></a>
@@ -27,10 +29,11 @@
 		<div>
 			<h1>Lista de trabajadores</h1>
 			<div id="list-container">
+				{% for trabajador in trabajadores %}
 				<div class="list-item">
 					<div class="list-information">
-						<h3>Mariano Olivares</h3>
-						<p>Ingeniero | <span></span> Activo</p>
+						<h3>{{trabajador[1]}} {{trabajador[2]}}</h3>
+						<p>{{trabajador[4]}} | <span></span> {{"Activo" if trabajador[8] == 1 else "Inactivo" }}</p>
 					</div>
 					<div class="button-container">
 						<a href="perfil/eliminar/perfil"><button>+</button></a>
@@ -39,6 +42,7 @@
 						<a href="mensaje/escribir"><button>Mensaje</button></a>
 					</div>
 				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</body>

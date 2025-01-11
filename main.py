@@ -3,6 +3,7 @@ import pymysql
 
 app = Flask(__name__)
 app.secret_key = 'nailongsecret'
+connection = pymysql.connect(host="127.0.0.1", user="user", password="12345", db="deliverys")
 
 #templates
 
@@ -12,7 +13,11 @@ def index():
 
 @app.route('/administrador')
 def administrador():
-    return render_template('administrador.html')
+    cursor = connection.cursor();
+    sql = "SELECT * FROM trabajador"
+    cursor.execute(sql)
+    trabajadores = cursor.fetchall()
+    return render_template('administrador.html', trabajadores=trabajadores)
 
 @app.route('/trabajador')
 def trabajador():
@@ -35,6 +40,7 @@ def login():
     if request.method == 'POST' and validateUser(request.form['nombre'], request.form['contrasena']):
         session['nombre'] = request.form['nombre']
         session['contrasena'] = request.form['contrasena']
+        session['rol'] = "administrador"
         return redirect(url_for('home'))
     else:
         return redirect(url_for('index'))
@@ -48,7 +54,7 @@ def logout():
 
 @app.route('/home')
 def home():
-    if(session['rol'] != 'administrador'):
+    if(session['rol'] == 'administrador'):
         return redirect(url_for('administrador'))
     else: 
         return redirect(url_for('trabajador'))
