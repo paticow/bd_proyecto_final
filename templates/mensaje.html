@@ -1,5 +1,8 @@
+<!DOCTYPE html>
 <html>
-	<head></head>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mensaje.css') }}">
+	</head>
 	<body>
 		<h1>Mensaje de {{message[2]}} {{message[3]}}</h1>
 		<form action="/mensaje/leido/{{message[0]}}" method="POST">

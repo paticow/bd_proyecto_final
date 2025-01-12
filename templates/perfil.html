@@ -1,67 +1,81 @@
+<!DOCTYPE html>
 <html>
-	<head></head>
-	<body>
-		<form action={{"/createUser" if modo == "crear" else "/modifyUser"}} method="POST">
-			<H1>Datos del trabajador</H1>
-			<label for="nombre">Nombre:</label>
-			<input placeholder="Jose" type="text" name="nombre" id="nombre" value="{{user[1]}}" />
+    <head>
+        <title>Perfil trabajador</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='perfil.css') }}">
+        <script>
+            function confirmarEliminacion(event) {
+                event.preventDefault();
+                if (confirm("¿Está seguro de que desea eliminar?")) {
+                    event.target.submit();
+                }
+            }
+        </script>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <form action={{"/createUser" if modo == "crear" else "/modifyUser"}} method="POST">
+            <H1>Datos del trabajador</H1>
+            <label for="nombre" class="titulos">Nombre:</label>
+            <input placeholder="Jose" type="text" name="nombre" id="nombre" value="{{user[1]}}" />
 
-			<label for="cedula">Cedula:</label>
-			<input placeholder="31938473" type="text" name="cedula" id="cedula" value="{{user[0]}}" />
+            <label for="cedula" class="titulos">Cedula:</label>
+            <input placeholder="31938473" type="text" name="cedula" id="cedula" value="{{user[0]}}" />
 
-			<label for="apellido">Apellido:</label>
-			<input placeholder="Gonzalez" type="text" name="apellido" id="apellido" value="{{user[2]}}" />
+            <label for="apellido" class="titulos">Apellido:</label>
+            <input placeholder="Gonzalez" type="text" name="apellido" id="apellido" value="{{user[2]}}" />
 
-			<label for="contrasena">Contrasena:</label>
-			<input placeholder="1jif_374rgx" type="text" name="contrasena" id="contrasena" value="{{user[3]}}" />
+            <label for="contrasena" class="titulos">Contrasena:</label>
+            <input placeholder="1jif_374rgx" type="text" name="contrasena" id="contrasena" value="{{user[3]}}" />
 
-			<label for="datos_transferencia">Datos de transferencia:</label>
-			<input placeholder="Mercantil, 0412378349, V23578455" type="text" name="datos_transferencia" id="datos_transferencia" value="{{user[7]}}" />
+            <label for="datos_transferencia" class="titulos">Datos de transferencia:</label>
+            <input placeholder="Mercantil, 0412378349, V23578455" type="text" name="datos_transferencia" id="datos_transferencia" value="{{user[7]}}" />
 
-			{% if modo == "trabajador" %}
-			<label for="rol">Rol:</label>
-			<input placeholder="administrador/trabajador" readonly type="text" name="rol" id="rol" value="{{user[4]}}" />
+            {% if modo == "trabajador" %}
+            <label for="rol" class="titulos">Rol:</label>
+            <input placeholder="administrador/trabajador" readonly type="text" name="rol" id="rol" value="{{user[4]}}" />
 
-			<label for="horas">Horas de trabajo:</label>
-			<input placeholder="8" readonly type="number" name="horas" id="horas" value="{{user[5]}}" />
+            <label for="horas" class="titulos">Horas de trabajo:</label>
+            <input placeholder="8" readonly type="number" name="horas" id="horas" value="{{user[5]}}" />
 
-			<label for="Sueldo">Sueldo:</label>
-			<input placeholder="270" readonly type="number" name="sueldo" id="rol" min="0" value="{{user[6]}}" />
-			{% else %}
-			<label for="rol">Rol:</label>
-			<select name="rol" id="rol" value="{{user[4]}}">
-				<option name="rol" value="trabajador">trabajador</option>
-				<option name="rol" value="administrador">administrador</option>
-			</select>
+            <label for="Sueldo" class="titulos">Sueldo:</label>
+            <input placeholder="270" readonly type="number" name="sueldo" id="rol" min="0" value="{{user[6]}}" />
+            {% else %}
+            <label for="rol" class="titulos">Rol:</label>
+            <select name="rol" id="rol" value="{{user[4]}}">
+                <option name="rol" value="trabajador">trabajador</option>
+                <option name="rol" value="administrador">administrador</option>
+            </select>
 
-			<label for="horas">Horas de trabajo:</label>
-			<input placeholder="8" type="number" name="horas" id="horas" value="{{user[5]}}" />
+            <label for="horas" class="titulos">Horas de trabajo:</label>
+            <input placeholder="8" type="number" name="horas" id="horas" value="{{user[5]}}" />
 
-			<label for="Sueldo">Sueldo:</label>
-			<input placeholder="270" type="number" name="sueldo" id="rol" min="0" value="{{user[6]}}" />
+            <label for="Sueldo" class="titulos">Sueldo:</label>
+            <input placeholder="270" type="number" name="sueldo" id="rol" min="0" value="{{user[6]}}" />
 
-			{% endif %}
+            {% endif %}
 
+            <Button>Guardar</Button>
+        </form>
+        <div id="botones-container">
+            <a href="/home"><Button>Salir</Button></a>
+            {% if modo == "eliminar" %}
+            <form action="/trabajador/eliminar" method="POST" onsubmit="confirmarEliminacion(event)">
+                <input type="hidden" name="id" value="{{user[0]}}" />
+                <button>Eliminar</button>
+            </form>
+            {% endif %}
+        </div>
 
-			<a><Button>Guardar</Button></a>
-		</form>
-		<div>
-			{% if modo == "eliminar" %}
-			<form action="/trabajador/eliminar" method="POST">
-				<input type="hidden" name="id" value="{{user[0]}}" />
-				<button>Eliminar</button>
-			</form>
-			{% endif %}
-			<a href="/home"><Button>Salir</Button></a>
-		</div>
-
-		{% if modo == "eliminar" %}
-		<form action="/sendMessage" method="POST">
-			<h1>Mensaje a {{user[1]}} {{user[2]}}</h1>
-			<textarea name="contenido" id="content" placeholder="..."></textarea>
-			<input name="cedula" value="{{user[0]}}" type="hidden" />
-			<input type="submit" value="Enviar" />
-		</form>	
-		{% endif %}
-	</body>
+        {% if modo == "eliminar" %}
+        <div class="recuadro">
+            <form action="/sendMessage" method="POST">
+                <h1>Mensaje a {{user[1]}} {{user[2]}}</h1>
+                <textarea name="contenido" id="content" placeholder="..."></textarea>
+                <input name="cedula" value="{{user[0]}}" type="hidden" />
+                <input type="submit" value="Enviar" />
+            </form>
+        </div>
+        {% endif %}
+    </body>
 </html>

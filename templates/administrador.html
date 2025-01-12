@@ -1,11 +1,15 @@
+<!DOCTYPE html>
 <html>
-	<head></head>
+	<head>
+		<title>Administrador</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin.css') }}">
+	</head>
 	<body>
 		<div id="top-container">
 			<div if="top-container">
 				<div id="informacion">
 					<h1>NAILONG.INC</h1>
-					<H2>Bienvenido de vuelta {{nombre}}</H2>
+					<H2>Bienvenido de vuelta <a>{{nombre}}</a></H2>
 					<H2>Admin</H2>
 					<div class="agregar-btn">
 						<a href="perfil/crear/nuevo"><button>Crear nuevo trabajador +</button></a>
@@ -14,7 +18,7 @@
 						<a href="perfil/administrador/gilberto"><button>Editar perfil +</button></a>
 					</div>
 					<div class="agregar-btn">
-						<a href="/logout"><button>Cerrar session</button></a>
+						<a href="/logout"><button>Cerrar sesión</button></a>
 					</div>
 				</div>
 				<div id="bottones"></div>
