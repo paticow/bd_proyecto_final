@@ -5,15 +5,14 @@ app = Flask(__name__)
 app.secret_key = 'nailongsecret'
 connection = pymysql.connect(host="127.0.0.1", user="user", password="12345", db="deliverys")
 
-#templates
-
+# templates
 @app.route('/')
 def index():
     return render_template('login.html')
 
 @app.route('/administrador')
 def administrador():
-    cursor = connection.cursor();
+    cursor = connection.cursor()
     sql = "SELECT * FROM trabajador WHERE rol='trabajador'"
     cursor.execute(sql)
     trabajadores = cursor.fetchall()
@@ -28,13 +27,15 @@ def trabajador():
     no_messages = "No tiene mensajes recientes" if len(mensajes) < 1 else ""
     return render_template('trabajador.html', nombre=session['nombre'], mensajes=mensajes, no_messages=no_messages)
 
-@app.route('/perfil/<modo>/<cedula>')
-#modo: administrador, trabajador, eliminar, crear
+@app.route('/perfil/<modo>/<cedula>') # modo: administrador, trabajador, eliminar, crear
 def perfil(modo, cedula):
     user = []
-    if modo == "administrador" or modo == "trabajador" : user = getTrabajador(session['cedula'])
-    if modo == "eliminar" : user = getTrabajador(cedula)
-    if modo == "crear" : user = []
+    if modo == "administrador" or modo == "trabajador":
+        user = getTrabajador(session['cedula'])
+    if modo == "eliminar":
+        user = getTrabajador(cedula)
+    if modo == "crear":
+        user = []
     return render_template('perfil.html', modo=modo, user=user)
 
 @app.route('/mensaje/<id>')
@@ -100,9 +101,8 @@ def modifyUser():
     if request.method == 'POST':
         cursor = connection.cursor()
         print(request.form)
-        sql = "UPDATE trabajador SET nombre=%s, apellido=%s, cedula=%s, contrasena=%s, datos_transferencia=%s, rol=%s, horas=%s WHERE cedula=%s"
-        cursor.execute(sql, [request.form['nombre'], request.form['apellido'], request.form['cedula'], request.form['contrasena'] ,request.form['datos_transferencia'], request.form['rol'], request.form['horas'], request.form['cedula']])
-        session['nombre'] = request.form['nombre']
+        sql = "UPDATE trabajador SET nombre=%s, apellido=%s, contrasena=%s, datos_transferencia=%s, rol=%s, horas=%s, sueldo=%s WHERE cedula=%s"
+        cursor.execute(sql, [request.form['nombre'], request.form['apellido'], request.form['contrasena'], request.form['datos_transferencia'], request.form['rol'], request.form['horas'], request.form['sueldo'], request.form['cedula']])
         connection.commit()
         return redirect(url_for('home'))
     else:
@@ -113,7 +113,7 @@ def sendMessage():
     if request.method == 'POST':
         cursor = connection.cursor()
         sql = "INSERT INTO mensaje (fk_administrador, fk_trabajador, contenido, leido, resumen) VALUES (%s, %s, %s, %s, %s)"
-        cursor.execute(sql, [session['cedula'], request.form['cedula'], request.form['contenido'], 0, request.form['contenido'][0:26] + "..."])
+        cursor.execute(sql, [session['cedula'], request.form['cedula'], request.form['contenido'], 0, request.form['contenido'][0:26]])
         connection.commit()
         return redirect(url_for('home'))
     else:
@@ -131,13 +131,11 @@ def logout():
 def home():
     if(session['rol'] == 'administrador'):
         return redirect(url_for('administrador'))
-    else: 
+    else:
         return redirect(url_for('trabajador'))
 
-#editar perfil
-
-
-#metodos
+# editar perfil
+# metodos
 def validateUser(nombre, contrasena):
     return True
 
@@ -152,6 +150,7 @@ def setUserStatus(cedula, estado):
     sql = "UPDATE trabajador SET estado=%s WHERE cedula=%s"
     cursor.execute(sql, [estado, session['cedula']])
     connection.commit()
+
 
 if __name__ == '__main__':
     app.run(debug=True)
