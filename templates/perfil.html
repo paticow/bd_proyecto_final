@@ -29,7 +29,10 @@
 			<input placeholder="270" readonly type="number" name="sueldo" id="rol" min="0" value="{{user[6]}}" />
 			{% else %}
 			<label for="rol">Rol:</label>
-			<input placeholder="administrador/trabajador" type="text" name="rol" id="rol" value="{{user[4]}}" />
+			<select name="rol" id="rol" value="{{user[4]}}">
+				<option name="rol" value="administrador">administrador</option>
+				<option name="rol" value="trabajador">trabajador</option>
+			</select>
 
 			<label for="horas">Horas de trabajo:</label>
 			<input placeholder="8" type="number" name="horas" id="horas" value="{{user[5]}}" />
@@ -44,7 +47,10 @@
 		</form>
 		<div>
 			{% if modo == "eliminar" %}
-			<a><Button>Eliminar</Button></a>
+			<form action="/trabajador/eliminar" method="POST">
+				<input type="hidden" name="id" value="{{user[0]}}" />
+				<button>Eliminar</button>
+			</form>
 			{% endif %}
 			<a href="/home"><Button>Salir</Button></a>
 		</div>

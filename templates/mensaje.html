@@ -1,9 +1,10 @@
 <html>
 	<head></head>
 	<body>
-		<h1>Mensaje de Luis Perez a Carlos Enrique</h1>
-		<form>
-			<textarea readonly placeholder="..."></textarea>
+		<h1>Mensaje de {{message[2]}} {{message[3]}}</h1>
+		<form action="/mensaje/leido/{{message[0]}}" method="POST">
+			<textarea readonly placeholder="...">{{message[1]}}</textarea>
+			<input type="submit" value="Marcar como leido" />
 		</form>
 	</body>
 </html>

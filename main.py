@@ -22,10 +22,11 @@ def administrador():
 @app.route('/trabajador')
 def trabajador():
     cursor = connection.cursor()
-    sql = "SELECT m.id, t.nombre, t.apellido, m.contenido FROM mensaje m left join trabajador t on m.fk_trabajador = t.cedula WHERE m.fk_trabajador = %s AND m.leido = 0"
+    sql = "SELECT m.id, t.nombre, t.apellido, m.contenido, m.resumen FROM mensaje m left join trabajador t on m.fk_trabajador = t.cedula WHERE m.fk_trabajador = %s AND m.leido = 0"
     cursor.execute(sql, [session['cedula']])
     mensajes = cursor.fetchall()
-    return render_template('trabajador.html', nombre=session['nombre'], mensajes=mensajes)
+    no_messages = "No tiene mensajes recientes" if len(mensajes) < 1 else ""
+    return render_template('trabajador.html', nombre=session['nombre'], mensajes=mensajes, no_messages=no_messages)
 
 @app.route('/perfil/<modo>/<cedula>')
 #modo: administrador, trabajador, eliminar, crear
@@ -36,11 +37,34 @@ def perfil(modo, cedula):
     if modo == "crear" : user = []
     return render_template('perfil.html', modo=modo, user=user)
 
-@app.route('/mensaje/<modo>')
-#modo: leer, escribir
-def mensaje(modo):
-    return render_template('mensaje.html', modo=modo)
+@app.route('/mensaje/<id>')
+def mensaje(id):
+    cursor = connection.cursor()
+    sql = "SELECT m.id, m.contenido, t.nombre, t.apellido FROM mensaje m left join trabajador t on m.fk_administrador = t.cedula WHERE id = %s AND leido = 0"
+    cursor.execute(sql, [id])
+    return render_template('mensaje.html', message=cursor.fetchone())
 
+@app.route('/mensaje/leido/<id>', methods=['POST', 'GET'])
+def marcarMensaje(id):
+    if request.method == 'POST':
+        cursor = connection.cursor()
+        sql = "UPDATE mensaje SET leido = 1 WHERE id = %s"
+        cursor.execute(sql, [id])
+        connection.commit()
+        return redirect(url_for('home'))
+    else:
+        pass
+
+@app.route('/trabajador/eliminar', methods=['POST', 'GET'])
+def eliminarTrabajador():
+    if request.method == 'POST':
+        cursor = connection.cursor()
+        sql = "DELETE FROM trabajador WHERE cedula=%s"
+        cursor.execute(sql, [request.form['id']])
+        connection.commit()
+        return redirect(url_for('home'))
+    else:
+        pass
 
 # redireccionamientos
 @app.route('/login', methods=['GET', 'POST'])
@@ -87,8 +111,8 @@ def modifyUser():
 def sendMessage():
     if request.method == 'POST':
         cursor = connection.cursor()
-        sql = "INSERT INTO mensaje (fk_administrador, fk_trabajador, contenido, leido) VALUES (%s, %s, %s, %s)"
-        cursor.execute(sql, [session['cedula'], request.form['cedula'], request.form['contenido'], 0])
+        sql = "INSERT INTO mensaje (fk_administrador, fk_trabajador, contenido, leido, resumen) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(sql, [session['cedula'], request.form['cedula'], request.form['contenido'], 0, request.form['contenido'][0:26] + "..."])
         connection.commit()
         return redirect(url_for('home'))
     else:

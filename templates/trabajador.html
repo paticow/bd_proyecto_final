@@ -24,21 +24,21 @@
 		<div>
 			<h1>Lista de Mensajes</h1>
 			<div id="list-container">
-				<p>{{mensajes}}</p>
 				{% for mensaje in mensajes %}
 				<div class="list-item">
 					<div class="list-information">
 						<h3>{{mensaje[1]}} {{mensaje[[2]]}}</h3>
-						<p>{{mensaje[3]}}</p>
+						<p>{{mensaje[4]}}</p>
 					</div>
 					<div class="button-container">
-						<a href="/messages">
+						<a href="/mensaje/{{mensaje[0]}}">
 							<button>+</button>
 						</a>
 					</div>
 				</div>
 				{% endfor %}
 			</div>
+			<h2>{{no_messages}}</h2>
 		</div>
 	</body>
 </html>
