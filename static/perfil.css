@@ -1,0 +1,102 @@
+body {
+    background-color: #f0e6db;
+    font-family: 'Roboto', sans-serif;
+    color: #380507;
+}
+
+h1 {
+    color: #802822;
+    font-size: 36px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+label {
+    color: #802822;
+    font-weight: bold;
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+input, select, textarea {
+    border: 2px solid #c0751d;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 60%;
+}
+
+button {
+    background-color: #802822;
+    color: #f0e6db;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #380507;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+div {
+    margin-top: 20px;
+}
+
+textarea {
+    height: 120px;
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+}
+
+.recuadro {
+    border: 1px solid #c0751d;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #c0751d;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 0 auto;
+}
+
+#botones-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#content {
+    display: block;
+    margin: 0 auto;
+}
+
+input[type="submit"] {
+    background-color: #802822;
+    color: #f0e6db;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 10px auto;
+}
+
+input[type="submit"]:hover {
+    background-color: #380507;
+}
+
+.titulos{
+color: #802822;
+        font-size: 20px;
+        font-family: 'Roboto', sans-serif;
+        text-align: right;
+}
