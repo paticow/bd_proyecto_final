@@ -14,7 +14,7 @@ def index():
 @app.route('/administrador')
 def administrador():
     cursor = connection.cursor();
-    sql = "SELECT * FROM trabajador"
+    sql = "SELECT * FROM trabajador WHERE rol='trabajador'"
     cursor.execute(sql)
     trabajadores = cursor.fetchall()
     return render_template('administrador.html', trabajadores=trabajadores, nombre=session['nombre'])
@@ -22,7 +22,7 @@ def administrador():
 @app.route('/trabajador')
 def trabajador():
     cursor = connection.cursor()
-    sql = "SELECT m.id, t.nombre, t.apellido, m.contenido, m.resumen FROM mensaje m left join trabajador t on m.fk_trabajador = t.cedula WHERE m.fk_trabajador = %s AND m.leido = 0"
+    sql = "SELECT m.id, t.nombre, t.apellido, m.contenido, m.resumen FROM mensaje m left join trabajador t on m.fk_administrador = t.cedula WHERE m.fk_trabajador = %s AND m.leido = 0"
     cursor.execute(sql, [session['cedula']])
     mensajes = cursor.fetchall()
     no_messages = "No tiene mensajes recientes" if len(mensajes) < 1 else ""
@@ -87,6 +87,7 @@ def login():
 def createUser():
     if request.method == 'POST':
         cursor = connection.cursor()
+        print(request.form)
         sql = "INSERT INTO trabajador (nombre, apellido, cedula, contrasena, datos_transferencia, rol, horas, sueldo, estado) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(sql, [request.form['nombre'], request.form['apellido'], request.form['cedula'], request.form['contrasena'], request.form['datos_transferencia'], request.form['rol'], request.form['horas'], request.form['sueldo'], 0])
         connection.commit()
@@ -99,8 +100,8 @@ def modifyUser():
     if request.method == 'POST':
         cursor = connection.cursor()
         print(request.form)
-        sql = "UPDATE trabajador SET nombre=%s, apellido=%s, cedula=%s, datos_transferencia=%s, rol=%s, horas=%s WHERE cedula=%s"
-        cursor.execute(sql, [request.form['nombre'], request.form['apellido'], request.form['cedula'], request.form['datos_transferencia'], request.form['rol'], request.form['horas'], request.form['cedula']])
+        sql = "UPDATE trabajador SET nombre=%s, apellido=%s, cedula=%s, contrasena=%s, datos_transferencia=%s, rol=%s, horas=%s WHERE cedula=%s"
+        cursor.execute(sql, [request.form['nombre'], request.form['apellido'], request.form['cedula'], request.form['contrasena'] ,request.form['datos_transferencia'], request.form['rol'], request.form['horas'], request.form['cedula']])
         session['nombre'] = request.form['nombre']
         connection.commit()
         return redirect(url_for('home'))
