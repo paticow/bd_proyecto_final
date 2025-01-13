@@ -2,16 +2,17 @@
 <html>
 	<head>
 		<title>Login</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
 	</head>
 	<body>
-		<h1>Inicio de session</h1>
+		<h1>NAILONG.INC</h1>
+		<h2>Inicio de sesión</h2>
 		<form action="/login" method="POST">
 			<label for="nombre">Nombre:</label>
 			<input type="text" name="nombre" id="nombre" />
 			<label for="contrasena">Contraseña:</label>
 			<input type="password" name="contrasena" id="contrasena" />
-			<input type="submit" value="Iniciar session" />
+			<input type="submit" value="Iniciar sesion" />
 		</form>
-		<p>¿No tienes cuenta? Haz click <a href="#">aquí</a> para registrarte.</p>
 	</body>
 </html>

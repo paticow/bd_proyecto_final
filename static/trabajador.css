@@ -1,0 +1,130 @@
+body {
+    background-color: #f0e6db;
+    font-family: 'Roboto', sans-serif;
+    color: #380507;
+}
+
+#top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0e6db; /* Cambiado a color de fondo */
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#informacion {
+    flex: 1;
+}
+
+#informacion h1 {
+    color: #802822;
+    font-size: 36px;
+    font-family: 'Arial Black', sans-serif;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#informacion h2 {
+    color: #380507;
+}
+
+#pfp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#pfp-container img {
+    width: 300px;
+    height: 200px;
+    border: none;
+}
+
+#botones-container {
+    background-color: #f0e6db;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.agregar-btn {
+    display: inline-block;
+}
+
+.agregar-btn a button {
+    background-color: #802822;
+    color: #f0e6db;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.agregar-btn a button:hover {
+    background-color: #380507;
+}
+
+#list-container {
+    background-color: #c0751d;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0e6db;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.list-information h3 {
+    color: #802822;
+}
+
+.list-information p {
+    color: #380507;
+}
+
+.button-container a button {
+    background-color: #802822;
+    color: #f0e6db;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-container a button:hover {
+    background-color: #380507;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #802822;
+}
+
+h2 {
+    font-weight: bold;
+    color: #802822;
+}
+
+a {
+    color: #802822;
+}

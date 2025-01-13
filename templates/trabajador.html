@@ -1,45 +1,45 @@
+<!DOCTYPE html>
 <html>
-	<head></head>
-	<body>
-		<div id="top-container">
-			<div if="top-container">
-				<div id="informacion">
-					<h1>NAILONG.INC</h1>
-					<H2>Bienvenido de vuelta {{nombre}}</H2>
-					<H2>Trabajador</H2>
-					<div class="agregar-btn">
-						<a href="/perfil/trabajador/Gilberto"><button>Editar perfil +</button></a>
-					</div>
-					<div class="agregar-btn">
-						<a href="/logout"><button>Cerrar session</button></a>
-					</div>
-				</div>
-				<div id="bottones"></div>
-			</div>
-			<div id="pfp-container">
-				<img src="../static/nailong.jpg" alt="pfp" />
-			</div>
-		</div>
+    <head>
+        <title>Trabajadores</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin.css') }}">
+    </head>
+    <body>
+        <div id="top-container">
+            <div id="informacion">
+                <h1>NAILONG.INC</h1>
+                <h2>Bienvenido de vuelta <span id="nombre"><a>{{nombre}}</a></span></h2>
+                <h2>Trabajador</h2>
+                <div class="agregar-btn">
+                    <a href="/perfil/trabajador/Gilberto"><button>Editar perfil +</button></a>
+                </div>
+                <div class="agregar-btn">
+                    <a href="/logout"><button>Cerrar sesión</button></a>
+                </div>
+            </div>
+            <div id="pfp-container">
+                <img src="../static/nailong.jpg" alt="nailong, the company mascot" />
+            </div>
+        </div>
 
-		<div>
-			<h1>Lista de Mensajes</h1>
-			<div id="list-container">
-				{% for mensaje in mensajes %}
-				<p>{{mensaje}}</p>
-				<div class="list-item">
-					<div class="list-information">
-						<h3>{{mensaje[1]}} {{mensaje[[2]]}}</h3>
-						<p>{{mensaje[4]}}</p>
-					</div>
-					<div class="button-container">
-						<a href="/mensaje/{{mensaje[0]}}">
-							<button>+</button>
-						</a>
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-			<h2>{{no_messages}}</h2>
-		</div>
-	</body>
+        <div>
+            <h1>Lista de Mensajes</h1>
+            <div id="list-container">
+                {% for mensaje in mensajes %}
+                <div class="list-item">
+                    <div class="list-information">
+                        <h3>{{mensaje[1]}} {{mensaje[2]}}</h3>
+                        <p>{{mensaje[4]}}</p>
+                    </div>
+                    <div class="button-container">
+                        <a href="/mensaje/{{mensaje[0]}}">
+                            <button>+</button>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <h2>{{no_messages}}</h2>
+        </div>
+    </body>
 </html>
