@@ -1,101 +1,98 @@
 /* Estilos para la página de inicio de sesión */
 body {
-    background-color: #f0e6db;
+    background-color: #f0e6db; /* Color de fondo más claro */
     font-family: 'Roboto', sans-serif;
-    color: #380507;
+    color: #333; /* Color de texto más neutral */
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
     text-align: center;
     font-size: 36px;
-    color: #802822;
+    color: #c75b1d; /* Un tono más vibrante */
+    margin-top: 50px; /* Espaciado superior */
 }
 
 h2 {
     text-align: center;
-    color: #802822;
+    color: #c75b1d; /* Mismo tono que h1 */
+    margin-bottom: 20px; /* Espaciado inferior */
 }
 
 form {
-    background-color: #c0751d;
+    background-color: #ffffff; /* Fondo blanco para el formulario */
     padding: 40px;
     border-radius: 10px;
     width: 400px;
-    margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 30px auto; /* Margen superior e inferior */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra más suave */
 }
 
 label {
     display: block;
     margin-bottom: 10px;
-    color: #380507;
+    color: #555; /* Color de texto más suave */
 }
 
 input[type="text"],
 input[type="password"] {
     width: calc(100% - 22px);
-    padding: 10px;
+    padding: 12px; /* Más padding para mayor comodidad */
     margin-bottom: 20px;
-    border: 1px solid #380507;
+    border: 1px solid #ccc; /* Borde más claro */
     border-radius: 5px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    transition: border-color 0.3s; /* Efecto de transición */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #c75b1d; /* Cambio de color al enfocar */
 }
 
 input[type="submit"] {
-    background-color: #802822;
-    color: #f0e6db;
-    padding: 10px;
+    background-color: #c75b1d; /* Color de fondo más vibrante */
+    color: #ffffff; /* Texto blanco */
+    padding: 12px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    font-size: 16px; /* Tamaño de fuente más grande */
+    transition: background-color 0.3s; /* Efecto de transición */
 }
 
 input[type="submit"]:hover {
-    background-color: #380507;
+    background-color: #a65a1d; /* Color más oscuro al pasar el mouse */
 }
 
 p {
     text-align: center;
-    color: #380507;
+    color: #555; /* Color de texto más suave */
 }
 
 a {
-    color: #c0751d;
+    color: #c75b1d;
     text-decoration: none;
     font-weight: bold;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #802822;
 }
 
 /* Estilos para la página de mensaje */
 textarea {
     width: calc(100% - 22px);
-    padding: 10px;
+    padding: 12px; /* Más padding para mayor comodidad */
     margin-bottom: 20px;
-    border: 1px solid #380507;
+    border: 1px solid #ccc; /* Borde más claro */
     border-radius: 5px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     resize: none;
-}
-
-input[type="submit"] {
-    background-color: #802822;
-    color: #f0e6db;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-input[type="submit"]:hover {
-    background-color: #380507;
 }

@@ -3,6 +3,13 @@
 	<head>
 		<title>Login</title>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+		<meta charset="UTF-8">
+		<title>Login</title>
+		<script>
+			function showError(message) {
+				alert(message);
+			}
+		</script>
 	</head>
 	<body>
 		<h1>NAILONG.INC</h1>
@@ -13,6 +20,11 @@
 			<label for="contrasena">Contraseña:</label>
 			<input type="password" name="contrasena" id="contrasena" />
 			<input type="submit" value="Iniciar sesion" />
+			{% if error %}
+			<script>
+				showError("{{ error }}");
+			</script>
+			{% endif %}
 		</form>
 	</body>
 </html>
