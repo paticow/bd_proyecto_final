@@ -70,7 +70,12 @@ def eliminarTrabajador():
 # redireccionamientos
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST' and validateUser(request.form['nombre'], request.form['contrasena']):
+    if request.method == 'POST':
+        if request.form['nombre'] == "" or request.form['contrasena'] == "":
+            return render_template('login.html', error="Debe llenar todos los campos")
+        if not validateUser(request.form['nombre'], request.form['contrasena']):
+            return render_template('login.html', error="Usuario o contraseña incorrectos")
+        
         session['nombre'] = request.form['nombre']
         session['contrasena'] = request.form['contrasena']
         cursor = connection.cursor()
@@ -83,6 +88,7 @@ def login():
         return redirect(url_for('home'))
     else:
         return redirect(url_for('index'))
+
 
 @app.route("/createUser", methods=['GET','POST'])
 def createUser():
@@ -137,7 +143,14 @@ def home():
 # editar perfil
 # metodos
 def validateUser(nombre, contrasena):
-    return True
+    cursor = connection.cursor()
+    sql = "SELECT * FROM trabajador WHERE nombre=%s"
+    cursor.execute(sql, [nombre])
+    usuario = cursor.fetchone()
+    if usuario and usuario[3] == contrasena:
+        return True
+    return False
+
 
 def getTrabajador(cedula):
     cursor = connection.cursor()
