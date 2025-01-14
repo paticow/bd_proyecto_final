@@ -9,7 +9,7 @@
 			<div if="top-container">
 				<div id="informacion">
 					<h1>NAILONG.INC</h1>
-					<H2>Bienvenido de vuelta <a>{{nombre}}</a></H2>
+					<H2>Bienvenido de vuelta <a style="text-transform: capitalize;">{{nombre}}</a></H2>
 					<H2>Admin</H2>
 					<div class="agregar-btn">
 						<a href="perfil/crear/nuevo"><button>Crear nuevo trabajador +</button></a>
@@ -34,8 +34,8 @@
 				{% for trabajador in trabajadores %}
 				<div class="list-item">
 					<div class="list-information">
-						<h3>{{trabajador[1]}} {{trabajador[2]}}</h3>
-						<p>{{trabajador[4]}} | <span></span> {{"Activo" if trabajador[8] == 1 else "Inactivo" }}</p>
+						<h3 style="text-transform: capitalize;">{{trabajador[1]}} {{trabajador[2]}}</h3>
+						<p style="text-transform: capitalize;">{{trabajador[4]}} | <span></span> {{"Activo" if trabajador[8] == 1 else "Inactivo" }}</p>
 					</div>
 					<div class="button-container">
 						<a href="perfil/eliminar/{{trabajador[0]}}"><button>+</button></a>

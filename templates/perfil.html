@@ -25,7 +25,7 @@
             <label for="apellido" class="titulos">Apellido:</label>
             <input placeholder="Gonzalez" type="text" name="apellido" id="apellido" value="{{user[2]}}" />
 
-            <label for="contrasena" class="titulos">Contrasena:</label>
+            <label for="contrasena" class="titulos">Contraseña:</label>
             <input placeholder="1jif_374rgx" type="text" name="contrasena" id="contrasena" value="{{user[3]}}" />
 
             <label for="datos_transferencia" class="titulos">Datos de transferencia:</label>
@@ -71,7 +71,7 @@
         <div class="recuadro">
             <form action="/sendMessage" method="POST">
                 <h1>Mensaje a {{user[1]}} {{user[2]}}</h1>
-                <textarea name="contenido" id="content" placeholder="..."></textarea>
+                <textarea name="contenido" id="content" placeholder="Máximo de caracteres: 500" maxlength="500"></textarea>
                 <input name="cedula" value="{{user[0]}}" type="hidden" />
                 <input type="submit" value="Enviar" />
             </form>
