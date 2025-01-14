@@ -1,13 +1,14 @@
 body {
-    background-color: #f0e6db;
-    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(180deg,#f8e7d3 0%,#f1cea7 100%);
+    /*background-color:#eec291;*/
+    font-family: 'Candara', sans-serif;
     color: #380507;
 }
 
 h1 {
     color: #802822;
     font-size: 36px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Candara', sans-serif;
     text-align: center;
 }
 
@@ -35,6 +36,7 @@ button {
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
+    font-family: 'Candara', sans-serif;
 }
 
 button:hover {
@@ -57,14 +59,15 @@ textarea {
 }
 
 .recuadro {
-    border: 1px solid #c0751d;
+    border: 1px solid #eab67b;
     padding: 10px;
     margin-top: 20px;
-    background-color: #c0751d;
+    background-color: #eab67b;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 50%;
     margin: 0 auto;
+    font-family: 'Candara', sans-serif;
 }
 
 #botones-container {
@@ -97,6 +100,6 @@ input[type="submit"]:hover {
 .titulos{
 color: #802822;
         font-size: 20px;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Candara', sans-serif;
         text-align: right;
 }

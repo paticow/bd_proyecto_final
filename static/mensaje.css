@@ -1,6 +1,6 @@
 body {
-    background-color: #f0e6db;
-    font-family: 'Roboto', sans-serif;
+    background-color: #eab67b;
+    font-family: 'Candara', sans-serif;
     color: #380507;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@ h1 {
 }
 
 form {
-    background-color: #c0751d;
+    background-color: #e39e4f;
     padding: 40px;
     border-radius: 10px;
     width: 400px;
@@ -28,7 +28,7 @@ textarea {
     width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #380507;
+    border: 1px solid #732626;
     border-radius: 5px;
     display: block;
     margin-left: auto;
@@ -46,7 +46,7 @@ textarea::placeholder {
 }
 
 input[type="submit"] {
-    background-color: #802822;
+    background-color: #993333;
     color: #f0e6db;
     padding: 10px;
     border: none;
@@ -56,5 +56,5 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #380507;
+    background-color: #732626;
 }
